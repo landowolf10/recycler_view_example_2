@@ -30,7 +30,7 @@ class RecyclerAdapter(private var noteList: MutableList<NotesModel>): RecyclerVi
         return noteList.size
     }
 
-    inner class NoteHolder(private val itemView: View): RecyclerView.ViewHolder(itemView)
+    inner class NoteHolder(itemView: View): RecyclerView.ViewHolder(itemView)
     {
         fun assignData(noteList: NotesModel)
         {
@@ -39,6 +39,13 @@ class RecyclerAdapter(private var noteList: MutableList<NotesModel>): RecyclerVi
 
             noteTitle.text = noteList.title
             noteContent.text = noteList.content
+
+            itemView.setOnClickListener {
+                val position: Int = adapterPosition
+
+                Toast.makeText(itemView.context, "Note title: ${noteList.title}, Note content: " +
+                        "${noteList.content}, Note position: ${position + 1}", Toast.LENGTH_LONG).show()
+            }
         }
     }
 }
